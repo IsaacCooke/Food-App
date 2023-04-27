@@ -15,7 +15,7 @@ const HistoryScreen = () => {
     <View>
       {days.length > 0 ? (
         days.map(day => (
-          <View key={day.id}>
+          <View key={day.date}>
             <Text>Date: {day.date}</Text>
             <Text>Breakfast: {day.breakfast}</Text>
             <Text>Lunch: {day.lunch}</Text>
