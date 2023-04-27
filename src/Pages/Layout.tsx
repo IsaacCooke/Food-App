@@ -6,6 +6,9 @@ import HistoryScreen from './History/HistoryScreen';
 import HomeScreen from './Home/HomeScreen';
 import SettingsScreen from './Settings/SettingsScreen';
 
+import AddDay from './Home/AddDay';
+import UpdateDay from './Home/UpdateDay';
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -22,6 +25,16 @@ const HomeStack = () => {
         name="Home"
         component={HomeScreen}
         options={{ title: 'Home' }}
+      />
+      <Stack.Screen
+        name="AddDay"
+        component={AddDay}
+        options={{ title: 'Add Day' }}
+      />
+      <Stack.Screen
+        name="UpdateDay"
+        component={UpdateDay}
+        options={{ title: 'Update Day' }}
       />
     </Stack.Navigator>
   );
