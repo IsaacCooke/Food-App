@@ -5,21 +5,21 @@ import {Button, View} from "react-native";
 import {Picker} from "@react-native-picker/picker";
 
 const AddDay = ({navigation}) => {
-  const [breakfast, setBreakfast] = useState<number>();
-  const [lunch, setLunch] = useState<number>();
-  const [dinner, setDinner] = useState<number>();
-  const [morningSnack, setMorningSnack] = useState<number>();
-  const [afternoonSnack, setAfternoonSnack] = useState<number>();
-  const [eveningSnack, setEveningSnack] = useState<number>();
+  const [breakfast, setBreakfast] = useState<number>(0);
+  const [lunch, setLunch] = useState<number>(0);
+  const [dinner, setDinner] = useState<number>(0);
+  const [morningSnack, setMorningSnack] = useState<number>(0);
+  const [afternoonSnack, setAfternoonSnack] = useState<number>(0);
+  const [eveningSnack, setEveningSnack] = useState<number>(0);
 
-  const [showBreakfast, setShowBreakfast] = useState(false);
-  const [showLunch, setShowLunch] = useState(false);
-  const [showDinner, setShowDinner] = useState(false);
-  const [showMorningSnack, setShowMorningSnack] = useState(false);
-  const [showAfternoonSnack, setShowAfternoonSnack] = useState(false);
-  const [showEveningSnack, setShowEveningSnack] = useState(false);
+  const [showBreakfast, setShowBreakfast] = useState<boolean>(false);
+  const [showLunch, setShowLunch] = useState<boolean>(false);
+  const [showDinner, setShowDinner] = useState<boolean>(false);
+  const [showMorningSnack, setShowMorningSnack] = useState<boolean>(false);
+  const [showAfternoonSnack, setShowAfternoonSnack] = useState<boolean>(false);
+  const [showEveningSnack, setShowEveningSnack] = useState<boolean>(false);
 
-  const [state, refresh] = useState(false);
+  const [state, refresh] = useState<boolean>(false);
 
   useEffect(() => {
     getDay(getDate(), (day) => {
