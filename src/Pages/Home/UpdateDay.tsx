@@ -1,13 +1,12 @@
 import {
-  Button,
   Modal,
-  StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  Pressable
 } from "react-native";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {
+  resetDay,
   updateAfternoonSnack,
   updateBreakfast,
   updateDinner,
@@ -16,6 +15,7 @@ import {
   updateMorningSnack,
 } from "../../Data/DataDriver";
 import {getDate} from "../../Data/Helpers";
+import {styles} from "../../Themes/MainTheme";
 
 const UpdateDay = () => {
   const [showBreakfastModal, setShowBreakfastModal] = useState(false);
@@ -75,13 +75,27 @@ const UpdateDay = () => {
 
   return (
     <View>
-      <Text>Update Day</Text>
-      <Button title={"Update Breakfast"} onPress={onShowBreakfastModal} />
-      <Button title={"Update Lunch"} onPress={onShowLunchModal} />
-      <Button title={"Update Dinner"} onPress={onShowDinnerModal} />
-      <Button title={"Update Morning Snack"} onPress={onShowMorningSnackModal} />
-      <Button title={"Update Afternoon Snack"} onPress={onShowAfternoonSnackModal} />
-      <Button title={"Update Evening Snack"} onPress={onShowEveningSnackModal} />
+      <Pressable style={styles.linkButton} onPress={onShowBreakfastModal}>
+        <Text style={styles.linkText}>Update Breakfast</Text>
+      </Pressable>
+      <Pressable style={styles.linkButton} onPress={onShowLunchModal}>
+        <Text style={styles.linkText}>Update Lunch</Text>
+      </Pressable>
+      <Pressable style={styles.linkButton} onPress={onShowDinnerModal}>
+        <Text style={styles.linkText}>Update Dinner</Text>
+      </Pressable>
+      <Pressable style={styles.linkButton} onPress={onShowMorningSnackModal}>
+        <Text style={styles.linkText}>Update Morning Snack</Text>
+      </Pressable>
+      <Pressable style={styles.linkButton} onPress={onShowAfternoonSnackModal}>
+        <Text style={styles.linkText}>Update Afternoon Snack</Text>
+      </Pressable>
+      <Pressable style={styles.linkButton} onPress={onShowEveningSnackModal}>
+        <Text style={styles.linkText}>Update Evening Snack</Text>
+      </Pressable>
+      <Pressable style={styles.linkButton} onPress={resetDay}>
+        <Text style={styles.linkText}>Reset Day</Text>
+      </Pressable>
       <UpdateBreakfast isVisible={showBreakfastModal} onClose={onHideBreakfastModal} />
       <UpdateLunch isVisible={showLunchModal} onClose={onHideLunchModal} />
       <UpdateDinner isVisible={showDinnerModal} onClose={onHideDinnerModal} />
@@ -94,7 +108,10 @@ const UpdateDay = () => {
 
 const UpdateBreakfast = ({isVisible, onClose}) => {
   const [breakfast, setBreakfast] = useState(0);
-  const [showOptions, setShowOptions] = useState(false);
+
+  useEffect(() => {
+    logBreakfast();
+  }, [breakfast]);
 
   const logBreakfast = () => {
     updateBreakfast(getDate(), breakfast);
@@ -105,31 +122,32 @@ const UpdateBreakfast = ({isVisible, onClose}) => {
 
   return (
     <Modal animationType="slide" transparent={false} visible={isVisible}>
-      <View style={styles.container}>
-        <Text>Update Breakfast</Text>
-        <Button title="Show Breakfast" onPress={() => setShowOptions(!showOptions)} />
-        {showOptions && (
+      <View style={styles.centeredContainer}>
+        <Text style={styles.titleText}>Update Breakfast</Text>
           <View>
             {options.map((option) => (
-              <TouchableOpacity key={option} onPress={() => setBreakfast(option)}>
-                <Text>{option}</Text>
-              </TouchableOpacity>
+              <Pressable key={option} style={[styles.linkButton, { width: 395}]} onPress={() => setBreakfast(option)}>
+                <Text style={styles.linkText}>{option}</Text>
+              </Pressable>
             ))}
           </View>
-        )}
-        <Button title={"Update"} onPress={logBreakfast} />
-        <Button title={"Cancel"} onPress={onClose} />
+        <Pressable style={styles.cancelButton} onPress={onClose}>
+          <Text style={styles.linkText}>Cancel</Text>
+        </Pressable>
       </View>
     </Modal>
   )
 }
 
 const UpdateLunch = ({isVisible, onClose}) => {
-  const [lunch, setLunch] = useState(0);
-  const [showOptions, setShowOptions] = useState(false);
+  const [Lunch, setLunch] = useState(0);
+
+  useEffect(() => {
+    logLunch();
+  }, [Lunch]);
 
   const logLunch = () => {
-    updateLunch(getDate(), lunch);
+    updateLunch(getDate(), Lunch);
     onClose();
   }
 
@@ -137,31 +155,32 @@ const UpdateLunch = ({isVisible, onClose}) => {
 
   return (
     <Modal animationType="slide" transparent={false} visible={isVisible}>
-      <View style={styles.container}>
-        <Text>Update Lunch</Text>
-        <Button title="Show Options" onPress={() => setShowOptions(!showOptions)} />
-        {showOptions && (
-          <View>
-            {options.map((option) => (
-              <TouchableOpacity key={option} onPress={() => setLunch(option)}>
-                <Text>{option}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-        <Button title={"Update"} onPress={logLunch} />
-        <Button title={"Cancel"} onPress={onClose} />
+      <View style={styles.centeredContainer}>
+        <Text style={styles.titleText}>Update Lunch</Text>
+        <View>
+          {options.map((option) => (
+            <Pressable key={option} style={[styles.linkButton, { width: 395}]} onPress={() => setLunch(option)}>
+              <Text style={styles.linkText}>{option}</Text>
+            </Pressable>
+          ))}
+        </View>
+        <Pressable style={styles.cancelButton} onPress={onClose}>
+          <Text style={styles.linkText}>Cancel</Text>
+        </Pressable>
       </View>
     </Modal>
   )
 }
 
 const UpdateDinner = ({isVisible, onClose}) => {
-  const [dinner, setDinner] = useState(0);
-  const [showOptions, setShowOptions] = useState(false);
+  const [Dinner, setDinner] = useState(0);
+
+  useEffect(() => {
+    logDinner();
+  }, [Dinner]);
 
   const logDinner = () => {
-    updateDinner(getDate(), dinner);
+    updateDinner(getDate(), Dinner);
     onClose();
   }
 
@@ -169,20 +188,18 @@ const UpdateDinner = ({isVisible, onClose}) => {
 
   return (
     <Modal animationType="slide" transparent={false} visible={isVisible}>
-      <View style={styles.container}>
-        <Text>Update Dinner</Text>
-        <Button title="Show Options" onPress={() => setShowOptions(!showOptions)} />
-        {showOptions && (
-          <View>
-            {options.map((option) => (
-              <TouchableOpacity key={option} onPress={() => setDinner(option)}>
-                <Text>{option}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-        <Button title={"Update"} onPress={logDinner} />
-        <Button title={"Cancel"} onPress={onClose} />
+      <View style={styles.centeredContainer}>
+        <Text style={styles.titleText}>Update Dinner</Text>
+        <View>
+          {options.map((option) => (
+            <Pressable key={option} style={[styles.linkButton, { width: 395}]} onPress={() => setDinner(option)}>
+              <Text style={styles.linkText}>{option}</Text>
+            </Pressable>
+          ))}
+        </View>
+        <Pressable style={styles.cancelButton} onPress={onClose}>
+          <Text style={styles.linkText}>Cancel</Text>
+        </Pressable>
       </View>
     </Modal>
   )
@@ -190,11 +207,14 @@ const UpdateDinner = ({isVisible, onClose}) => {
 
 
 const UpdateMorningSnack = ({isVisible, onClose}) => {
-  const [morningSnack, setMorningSnack] = useState(0);
-  const [showOptions, setShowOptions] = useState(false);
+  const [MorningSnack, setMorningSnack] = useState(0);
+
+  useEffect(() => {
+    logMorningSnack();
+  }, [MorningSnack]);
 
   const logMorningSnack = () => {
-    updateMorningSnack(getDate(), morningSnack);
+    updateMorningSnack(getDate(), MorningSnack);
     onClose();
   }
 
@@ -202,31 +222,32 @@ const UpdateMorningSnack = ({isVisible, onClose}) => {
 
   return (
     <Modal animationType="slide" transparent={false} visible={isVisible}>
-      <View style={styles.container}>
-        <Text>Update Morning Snack</Text>
-        <Button title="Show Options" onPress={() => setShowOptions(!showOptions)} />
-        {showOptions && (
-          <View>
-            {options.map((option) => (
-              <TouchableOpacity key={option} onPress={() => setMorningSnack(option)}>
-                <Text>{option}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-        <Button title={"Update"} onPress={logMorningSnack} />
-        <Button title={"Cancel"} onPress={onClose} />
+      <View style={styles.centeredContainer}>
+        <Text style={styles.titleText}>Update MorningSnack</Text>
+        <View>
+          {options.map((option) => (
+            <Pressable key={option} style={[styles.linkButton, { width: 395}]} onPress={() => setMorningSnack(option)}>
+              <Text style={styles.linkText}>{option}</Text>
+            </Pressable>
+          ))}
+        </View>
+        <Pressable style={styles.cancelButton} onPress={onClose}>
+          <Text style={styles.linkText}>Cancel</Text>
+        </Pressable>
       </View>
     </Modal>
   )
 }
 
 const UpdateAfternoonSnack = ({isVisible, onClose}) => {
-  const [afternoonSnack, setAfternoonSnack] = useState(0);
-  const [showOptions, setShowOptions] = useState(false);
+  const [AfternoonSnack, setAfternoonSnack] = useState(0);
+
+  useEffect(() => {
+    logAfternoonSnack();
+  }, [AfternoonSnack]);
 
   const logAfternoonSnack = () => {
-    updateAfternoonSnack(getDate(), afternoonSnack);
+    updateAfternoonSnack(getDate(), AfternoonSnack);
     onClose();
   }
 
@@ -234,31 +255,32 @@ const UpdateAfternoonSnack = ({isVisible, onClose}) => {
 
   return (
     <Modal animationType="slide" transparent={false} visible={isVisible}>
-      <View style={styles.container}>
-        <Text>Update Afternoon Snack</Text>
-        <Button title="Show Options" onPress={() => setShowOptions(!showOptions)} />
-        {showOptions && (
-          <View>
-            {options.map((option) => (
-              <TouchableOpacity key={option} onPress={() => setAfternoonSnack(option)}>
-                <Text>{option}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-        <Button title={"Update"} onPress={logAfternoonSnack} />
-        <Button title={"Cancel"} onPress={onClose} />
+      <View style={styles.centeredContainer}>
+        <Text style={styles.titleText}>Update AfternoonSnack</Text>
+        <View>
+          {options.map((option) => (
+            <Pressable key={option} style={[styles.linkButton, { width: 395}]} onPress={() => setAfternoonSnack(option)}>
+              <Text style={styles.linkText}>{option}</Text>
+            </Pressable>
+          ))}
+        </View>
+        <Pressable style={styles.cancelButton} onPress={onClose}>
+          <Text style={styles.linkText}>Cancel</Text>
+        </Pressable>
       </View>
     </Modal>
   )
 }
 
 const UpdateEveningSnack = ({isVisible, onClose}) => {
-  const [eveningSnack, setEveningSnack] = useState(0);
-  const [showOptions, setShowOptions] = useState(false);
+  const [EveningSnack, setEveningSnack] = useState(0);
+
+  useEffect(() => {
+    logEveningSnack();
+  }, [EveningSnack]);
 
   const logEveningSnack = () => {
-    updateEveningSnack(getDate(), eveningSnack);
+    updateEveningSnack(getDate(), EveningSnack);
     onClose();
   }
 
@@ -266,31 +288,21 @@ const UpdateEveningSnack = ({isVisible, onClose}) => {
 
   return (
     <Modal animationType="slide" transparent={false} visible={isVisible}>
-      <View style={styles.container}>
-        <Text>Update Evening Snack</Text>
-        <Button title="Show Options" onPress={() => setShowOptions(!showOptions)} />
-        {showOptions && (
-          <View>
-            {options.map((option) => (
-              <TouchableOpacity key={option} onPress={() => setEveningSnack(option)}>
-                <Text>{option}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-        <Button title={"Update"} onPress={logEveningSnack} />
-        <Button title={"Cancel"} onPress={onClose} />
+      <View style={styles.centeredContainer}>
+        <Text style={styles.titleText}>Update EveningSnack</Text>
+        <View>
+          {options.map((option) => (
+            <Pressable key={option} style={[styles.linkButton, { width: 395}]} onPress={() => setEveningSnack(option)}>
+              <Text style={styles.linkText}>{option}</Text>
+            </Pressable>
+          ))}
+        </View>
+        <Pressable style={styles.cancelButton} onPress={onClose}>
+          <Text style={styles.linkText}>Cancel</Text>
+        </Pressable>
       </View>
     </Modal>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-})
 
 export default UpdateDay;

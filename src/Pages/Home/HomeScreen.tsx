@@ -1,4 +1,9 @@
-import { View, Text, Button } from "react-native";
+import {
+  View,
+  Text,
+  Pressable
+} from "react-native";
+import { styles } from "../../Themes/MainTheme";
 
 const HomeScreen = ({navigation}) => {
   const AddDay = () => {
@@ -10,10 +15,13 @@ const HomeScreen = ({navigation}) => {
   }
 
   return (
-    <View>
-      <Text>Home</Text>
-      <Button onPress={AddDay} title="Add Day" />
-      <Button onPress={UpdateDay} title="Update Day" />
+    <View style={styles.container}>
+      <Pressable onPress={AddDay} style={styles.linkButton}>
+        <Text>Add Day</Text>
+      </Pressable>
+      <Pressable onPress={UpdateDay} style={styles.linkButton}>
+        <Text>Update Day</Text>
+      </Pressable>
     </View>
   );
 }

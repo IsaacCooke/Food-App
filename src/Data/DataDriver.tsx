@@ -1,5 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 import { Platform } from 'react-native';
+import {getDate} from "./Helpers";
 
 const db = SQLite.openDatabase('db.db');
 
@@ -24,6 +25,14 @@ export const initDatabase = () => {
     );
     tx.executeSql('INSERT INTO days (date, breakfast, lunch, dinner, evening_snack, morning_snack, afternoon_snack)\n VALUES (\'10-04-2023\', 5, 2, 5, 2, 1, 3);\n');
   });
+}
+
+export const resetDay = () => {
+  db.transaction(tx => {
+    tx.executeSql('INSERT OR REPLACE INTO days (date, breakfast, lunch, dinner, morning_snack, afternoon_snack, evening_snack) VALUES (?, 0, 0, 0, 0, 0, 0);',
+      [getDate()]);
+    }
+  )
 }
 
 export const logDay = (date: string, breakfast: number, lunch: number, dinner: number, morning_snack: number, afternoon_snack: number, evening_snack: number) => {

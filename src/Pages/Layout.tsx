@@ -9,6 +9,8 @@ import SettingsScreen from './Settings/SettingsScreen';
 import AddDay from './Home/AddDay';
 import UpdateDay from './Home/UpdateDay';
 
+import { colors } from '../Themes/MainTheme';
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -17,7 +19,7 @@ const HomeStack = () => {
     <Stack.Navigator
       initialRouteName={"Home"}
       screenOptions={{
-        headerStyle: { backgroundColor: '#5b5b5b' },
+        headerStyle: { backgroundColor: colors.secondary },
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: 'bold' }
       }}>
@@ -45,7 +47,7 @@ const HistoryStack = () => {
     <Stack.Navigator
       initialRouteName={"History"}
       screenOptions={{
-        headerStyle: { backgroundColor: '#5b5b5b' },
+        headerStyle: { backgroundColor: colors.secondary },
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: 'bold' }
       }}>
@@ -63,7 +65,7 @@ const SettingsStack = () => {
     <Stack.Navigator
       initialRouteName={"Settings"}
       screenOptions={{
-        headerStyle: { backgroundColor: '#5b5b5b' },
+        headerStyle: { backgroundColor: colors.secondary },
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: 'bold' }
       }}>
@@ -82,8 +84,8 @@ const Layout = () => {
     <Tab.Navigator
       initialRouteName={"HomeStack"}
       screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
-        tabBarStyle: { backgroundColor: '#5b5b5b' },
+        tabBarActiveTintColor: colors.primary,
+        tabBarStyle: { backgroundColor: colors.secondary },
         headerShown: false,
       }}
     >
