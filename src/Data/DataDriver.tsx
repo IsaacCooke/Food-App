@@ -45,6 +45,16 @@ export const getDay = (date: string, callback: (day: any) => void) => {
   )
 }
 
+export const getWeek = (callback: (days: any) => void) => {
+  db.transaction(
+    tx => {
+      tx.executeSql('select * from days order by date desc limit 7', [], (_, { rows }) => {
+        callback(rows._array);
+      });
+    }
+  )
+}
+
 export const getDays = (callback: (days: any) => void) => {
   db.transaction(
     tx => {
