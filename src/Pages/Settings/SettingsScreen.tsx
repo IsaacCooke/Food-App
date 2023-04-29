@@ -1,6 +1,6 @@
 import { View, Text, Button } from "react-native";
 import NotificationHandler from "../../Handlers/NotificationHandler";
-import { resetDatabase, initDatabase } from "../../Data/DataDriver";
+import { resetDatabase, initDatabase, initChallenge } from "../../Data/DataDriver";
 
 const SettingsScreen = () => {
   return (
@@ -10,6 +10,7 @@ const SettingsScreen = () => {
       <View>
         <Button onPress={resetDatabase} title="Reset Database" />
         <Button onPress={initDatabase} title="Init Database" />
+        <Button onPress={initChallenge} title="Init Challenge" />
       </View>
     </View>
   )

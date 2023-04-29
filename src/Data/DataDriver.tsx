@@ -1,30 +1,36 @@
 import * as SQLite from 'expo-sqlite';
-import { Platform } from 'react-native';
 import {getDate} from "./Helpers";
 
 const db = SQLite.openDatabase('db.db');
-
-export function openDatabase() {
-  if (Platform.OS === 'web') {
-    return {
-      transaction: () => {
-        return {
-          executeSql: () => { },
-        };
-      },
-    };
-  }
-
-  return SQLite.openDatabase('db.db');
-}
 
 export const initDatabase = () => {
   db.transaction(tx => {
     tx.executeSql(
       'create table if not exists days (date text PRIMARY KEY, breakfast integer, lunch integer, dinner integer, morning_snack integer, afternoon_snack integer, evening_snack integer);'
     );
-    tx.executeSql('INSERT INTO days (date, breakfast, lunch, dinner, evening_snack, morning_snack, afternoon_snack)\n VALUES (\'10-04-2023\', 5, 2, 5, 2, 1, 3);\n');
+    tx.executeSql(
+      'create table if not exists challenge (id integer PRIMARY KEY, challenge TEXT);',
+    );
   });
+}
+
+export const getChallenge = (callback: (challenge: any) => void) => {
+  db.transaction(
+    tx => {
+      tx.executeSql('select * from challenge order by id desc limit 1', [], (_, { rows }) => {
+        callback(rows._array);
+      });
+    }
+  )
+}
+
+export const addChallenge = (challenge: string) => {
+  db.transaction(
+    tx => {
+      tx.executeSql('INSERT OR REPLACE INTO challenge (id, challenge) VALUES (1, ?);',
+        [challenge]);
+    }
+  );
 }
 
 export const resetDay = () => {
@@ -125,8 +131,17 @@ export const updateEveningSnack = (date: string, evening_snack: number) => {
 export const resetDatabase = () => {
   db.transaction(
     tx => {
-      tx.executeSql('drop table days');
+      tx.executeSql('drop table days;');
+      tx.executeSql('drop table challenge;')
     }
   )
   initDatabase();
+}
+
+export const initChallenge = () => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'drop table challenge;',
+    );
+  })
 }

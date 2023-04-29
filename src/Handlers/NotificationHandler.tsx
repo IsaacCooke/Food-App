@@ -1,5 +1,6 @@
 import * as Notifications from 'expo-notifications';
 import { Button } from 'react-native';
+
 const NotificationHandler = () => {
   return (
     <>
@@ -15,12 +16,30 @@ async function scheduleNotifications() {
       content: {
         title: 'It\'s time to log today\'s meals!',
         body: 'Click here to log your meals for today',
+        sound: true,
+        sticky: true,
       },
       trigger: {
         hour: 19,
         minute: 30,
         repeats: true,
       },
+    });
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: 'You\'re challenge is ready!',
+        body: 'Click here to start your challenge',
+        sound: true,
+        vibrate: [1, 2],
+        sticky: true,
+      },
+      trigger: {
+        repeats: true,
+        hour: 17,
+        minute: 0,
+        weekday: 0,
+        seconds: 0,
+      }
     });
   }
 }

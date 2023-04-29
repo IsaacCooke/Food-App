@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from "@react-navigation/stack";
 
+import ChallengeScreen from './Challenge/ChallengeScreen';
 import HistoryScreen from './History/HistoryScreen';
 import HomeScreen from './Home/HomeScreen';
 import SettingsScreen from './Settings/SettingsScreen';
@@ -61,6 +62,24 @@ const HistoryStack = () => {
   );
 }
 
+const ChallengeStack = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName={"Challenge"}
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.secondary },
+        headerTintColor: '#fff',
+        headerTitleStyle: { fontWeight: 'bold' }
+      }}>
+      <Stack.Screen
+        name="Challenge"
+        component={ChallengeScreen}
+        options={{ title: 'Challenges' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 const SettingsStack = () => {
   return (
     <Stack.Navigator
@@ -107,6 +126,16 @@ const Layout = () => {
           title: "History",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name={"list-outline"} size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ChallengeStack"
+        component={ChallengeStack}
+        options={{
+          title: "Challenges",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name={"trophy-outline"} size={size} color={color} />
           ),
         }}
       />
