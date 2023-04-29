@@ -10,6 +10,7 @@ import AddDay from './Home/AddDay';
 import UpdateDay from './Home/UpdateDay';
 
 import { colors } from '../Themes/MainTheme';
+import {Ionicons} from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -89,9 +90,36 @@ const Layout = () => {
         headerShown: false,
       }}
     >
-      <Tab.Screen name="HomeStack" component={HomeStack} />
-      <Tab.Screen name="HistoryStack" component={HistoryStack} />
-      <Tab.Screen name="SettingsStack" component={SettingsStack} />
+      <Tab.Screen
+        name="HomeStack"
+        component={HomeStack}
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name={"home"} size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="HistoryStack"
+        component={HistoryStack}
+        options={{
+          title: "History",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name={"list-outline"} size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="SettingsStack"
+        component={SettingsStack}
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name={"cog-outline"} size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
     </NavigationContainer>
   )

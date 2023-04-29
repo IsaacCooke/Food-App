@@ -1,8 +1,13 @@
 import {useEffect, useState} from "react";
 import {getDay, logDay} from "../../Data/DataDriver";
 import {getDate} from "../../Data/Helpers";
-import {Button, View} from "react-native";
-import {Picker} from "@react-native-picker/picker";
+import {
+  Pressable,
+  ScrollView,
+  Text,
+  View
+} from "react-native";
+import {styles} from "../../Themes/MainTheme";
 
 const AddDay = ({navigation}) => {
   const [breakfast, setBreakfast] = useState<number>(0);
@@ -11,13 +16,6 @@ const AddDay = ({navigation}) => {
   const [morningSnack, setMorningSnack] = useState<number>(0);
   const [afternoonSnack, setAfternoonSnack] = useState<number>(0);
   const [eveningSnack, setEveningSnack] = useState<number>(0);
-
-  const [showBreakfast, setShowBreakfast] = useState<boolean>(false);
-  const [showLunch, setShowLunch] = useState<boolean>(false);
-  const [showDinner, setShowDinner] = useState<boolean>(false);
-  const [showMorningSnack, setShowMorningSnack] = useState<boolean>(false);
-  const [showAfternoonSnack, setShowAfternoonSnack] = useState<boolean>(false);
-  const [showEveningSnack, setShowEveningSnack] = useState<boolean>(false);
 
   const [state, refresh] = useState<boolean>(false);
 
@@ -43,87 +41,128 @@ const AddDay = ({navigation}) => {
 
 
   return (
-    <View>
-      <Button title="Show Breakfast" onPress={() => setShowBreakfast(!showBreakfast)} />
-      {showBreakfast && (
-        <Picker
-          selectedValue={breakfast}
-          onValueChange={(itemValue) => setBreakfast(itemValue)}
-        >
-          <Picker.Item label="0" value="0" />
-          <Picker.Item label="1" value="1" />
-          <Picker.Item label="2" value="2" />
-          <Picker.Item label="3" value="3" />
-          <Picker.Item label="4" value="4" />
-          <Picker.Item label="5" value="5" />
-        </Picker>
-      )}
-      <Button title="Show Morning Snack" onPress={() => setShowMorningSnack(!showMorningSnack)} />
-      {showMorningSnack && (
-        <Picker
-          selectedValue={morningSnack}
-          onValueChange={(itemValue) => setMorningSnack(itemValue)}
-        >
-          <Picker.Item label="0" value="0" />
-          <Picker.Item label="1" value="1" />
-          <Picker.Item label="2" value="2" />
-          <Picker.Item label="3" value="3" />
-        </Picker>
-      )}
-      <Button title="Show Lunch" onPress={() => setShowLunch(!showLunch)} />
-      {showLunch && (
-        <Picker
-          selectedValue={lunch}
-          onValueChange={(itemValue) => setLunch(itemValue)}
-        >
-          <Picker.Item label="0" value="0" />
-          <Picker.Item label="1" value="1" />
-          <Picker.Item label="2" value="2" />
-          <Picker.Item label="3" value="3" />
-          <Picker.Item label="4" value="4" />
-          <Picker.Item label="5" value="5" />
-        </Picker>
-      )}
-      <Button title="Show Afternoon Snack" onPress={() => setShowAfternoonSnack(!showAfternoonSnack)} />
-      {showAfternoonSnack && (
-        <Picker
-          selectedValue={afternoonSnack}
-          onValueChange={(itemValue) => setAfternoonSnack(itemValue)}
-        >
-          <Picker.Item label="0" value="0" />
-          <Picker.Item label="1" value="1" />
-          <Picker.Item label="2" value="2" />
-          <Picker.Item label="3" value="3" />
-        </Picker>
-      )}
-      <Button title="Show Dinner" onPress={() => setShowDinner(!showDinner)} />
-      {showDinner && (
-        <Picker
-          selectedValue={dinner}
-          onValueChange={(itemValue) => setDinner(itemValue)}
-        >
-          <Picker.Item label="0" value="0" />
-          <Picker.Item label="1" value="1" />
-          <Picker.Item label="2" value="2" />
-          <Picker.Item label="3" value="3" />
-          <Picker.Item label="4" value="4" />
-          <Picker.Item label="5" value="5" />
-        </Picker>
-      )}
-      <Button title="Show Evening Snack" onPress={() => setShowEveningSnack(!showEveningSnack)} />
-      {showEveningSnack && (
-        <Picker
-          selectedValue={eveningSnack}
-          onValueChange={(itemValue) => setEveningSnack(itemValue)}
-        >
-          <Picker.Item label="0" value="0" />
-          <Picker.Item label="1" value="1" />
-          <Picker.Item label="2" value="2" />
-          <Picker.Item label="3" value="3" />
-        </Picker>
-      )}
-      <Button title="Log Day" onPress={handleLogDay} />
-    </View>
+    <ScrollView>
+      <Text style={styles.linkText}>Breakfast: {breakfast}</Text>
+      <View style={styles.optionView}>
+      <Pressable style={styles.optionButton} onPress={() => setBreakfast(0)}>
+        <Text style={styles.linkText}>0</Text>
+      </Pressable>
+      <Pressable style={styles.optionButton} onPress={() => setBreakfast(1)}>
+        <Text style={styles.linkText}>1</Text>
+      </Pressable>
+      <Pressable style={styles.optionButton} onPress={() => setBreakfast(2)}>
+        <Text style={styles.linkText}>2</Text>
+      </Pressable>
+      <Pressable style={styles.optionButton} onPress={() => setBreakfast(3)}>
+        <Text style={styles.linkText}>3</Text>
+      </Pressable>
+      <Pressable style={styles.optionButton} onPress={() => setBreakfast(4)}>
+        <Text style={styles.linkText}>4</Text>
+      </Pressable>
+      <Pressable style={styles.optionButton} onPress={() => setBreakfast(5)}>
+        <Text style={styles.linkText}>5</Text>
+      </Pressable>
+      </View>
+
+      <Text style={styles.linkText}>Morning Snack: {morningSnack}</Text>
+      <View style={styles.optionView}>
+        <Pressable style={styles.optionButton} onPress={() => setMorningSnack(0)}>
+          <Text style={styles.linkText}>0</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setMorningSnack(1)}>
+          <Text style={styles.linkText}>1</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setMorningSnack(2)}>
+          <Text style={styles.linkText}>2</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setMorningSnack(3)}>
+          <Text style={styles.linkText}>3</Text>
+        </Pressable>
+      </View>
+
+      <Text style={styles.linkText}>Lunch: {lunch}</Text>
+      <View style={styles.optionView}>
+        <Pressable style={styles.optionButton} onPress={() => setLunch(0)}>
+          <Text style={styles.linkText}>0</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setLunch(1)}>
+          <Text style={styles.linkText}>1</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setLunch(2)}>
+          <Text style={styles.linkText}>2</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setLunch(3)}>
+          <Text style={styles.linkText}>3</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setLunch(4)}>
+          <Text style={styles.linkText}>4</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setLunch(5)}>
+          <Text style={styles.linkText}>5</Text>
+        </Pressable>
+      </View>
+
+      <Text style={styles.linkText}>Afternoon Snack: {afternoonSnack}</Text>
+      <View style={styles.optionView}>
+        <Pressable style={styles.optionButton} onPress={() => setAfternoonSnack(0)}>
+          <Text style={styles.linkText}>0</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setAfternoonSnack(1)}>
+          <Text style={styles.linkText}>1</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setAfternoonSnack(2)}>
+          <Text style={styles.linkText}>2</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setAfternoonSnack(3)}>
+          <Text style={styles.linkText}>3</Text>
+        </Pressable>
+      </View>
+
+      <Text style={styles.linkText}>Dinner: {dinner}</Text>
+      <View style={styles.optionView}>
+        <Pressable style={styles.optionButton} onPress={() => setDinner(0)}>
+          <Text style={styles.linkText}>0</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setDinner(1)}>
+          <Text style={styles.linkText}>1</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setDinner(2)}>
+          <Text style={styles.linkText}>2</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setDinner(3)}>
+          <Text style={styles.linkText}>3</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setDinner(4)}>
+          <Text style={styles.linkText}>4</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setDinner(5)}>
+          <Text style={styles.linkText}>5</Text>
+        </Pressable>
+      </View>
+
+      <Text style={styles.linkText}>Evening Snack: {eveningSnack}</Text>
+      <View style={styles.optionView}>
+        <Pressable style={styles.optionButton} onPress={() => setEveningSnack(0)}>
+          <Text style={styles.linkText}>0</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setEveningSnack(1)}>
+          <Text style={styles.linkText}>1</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setEveningSnack(2)}>
+          <Text style={styles.linkText}>2</Text>
+        </Pressable>
+        <Pressable style={styles.optionButton} onPress={() => setEveningSnack(3)}>
+          <Text style={styles.linkText}>3</Text>
+        </Pressable>
+      </View>
+
+      <Pressable style={styles.linkButton} onPress={handleLogDay}>
+        <Text style={styles.linkText}>Log Day</Text>
+      </Pressable>
+      <Pressable style={styles.cancelButton} onPress={() => navigation.pop()}>
+        <Text style={styles.linkText}>Cancel</Text>
+      </Pressable>
+    </ScrollView>
   );
 }
 

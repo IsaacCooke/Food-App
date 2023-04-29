@@ -32,6 +32,14 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
   },
+  optionButton: {
+    padding: 20,
+    margin: 5,
+    backgroundColor: primaryColor,
+    borderRadius: 10,
+    alignSelf: 'stretch',
+    alignItems: 'center',
+  },
   linkText: {
     color: black,
     fontSize: 24,
@@ -50,4 +58,9 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: black,
   },
+  optionView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  }
 });
