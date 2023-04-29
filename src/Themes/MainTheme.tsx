@@ -58,9 +58,41 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: black,
   },
+  centeredTitleText: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: black,
+    textAlign: 'center',
+    alignSelf: 'center',
+  },
   optionView: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  infoText: {
+    fontSize: 18,
+    color: black,
+    textAlign: 'justify',
+    paddingHorizontal: 20,
+  },
+  divider: {
+    borderBottomColor: black,
+    borderWidth: 0.5,
+    marginVertical: 10,
+  },
+  warningTitle: {
+    fontSize: 24,
+    color: tertiaryColor,
+    textAlign: 'center',
+    paddingHorizontal: 20,
+  },
+  warningText: {
+    fontSize: 18,
+    color: tertiaryColor,
+    textAlign: 'center',
+    paddingHorizontal: 20,
   }
 });

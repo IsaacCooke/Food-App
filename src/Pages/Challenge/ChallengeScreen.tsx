@@ -35,7 +35,7 @@ const ChallengeScreen = () => {
       <View>
         <Text>
           {challenge.map((item => (
-            <Text>{item.challenge}</Text>
+            <Text key={item.id} style={styles.centeredTitleText}>{item.challenge}</Text>
           )))}
         </Text>
       </View>
